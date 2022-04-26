@@ -1,5 +1,6 @@
 const axios = require('axios');
 const Dev = require('../models/Dev');
+const { index } = require('../models/utils/PointSchema');
 
 module.exports = {
     async store(request, response) {
@@ -39,5 +40,11 @@ module.exports = {
         }
         
         return response.json(dev);
+    },
+
+    async index(request, response){
+        const devs = await Dev.find();
+        
+        return response.json(devs); 
     }
 };
