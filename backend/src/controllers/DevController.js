@@ -1,6 +1,7 @@
 const axios = require('axios');
 const Dev = require('../models/Dev');
 const { index } = require('../models/utils/PointSchema');
+const parseStringAsArray = require('../utils/parseStringAsArray')
 
 module.exports = {
     async store(request, response) {
@@ -17,7 +18,7 @@ module.exports = {
         
             console.log("name ", name);
         
-            techsArray = techs.split(',').map(tech => tech.trim());
+            const techsArray = parseStringAsArray(techs);
             
             const location = {
                 type: 'Point',
