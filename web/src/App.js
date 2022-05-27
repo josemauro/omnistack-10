@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './global.css';
+import './Sidebar.css';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
           <form> 
             <div className="input-block">
               <label htmlFor="github_username"> Usuário do Github </label>
-              <input name="github_username" id="username_github" required />
+              <input name="github_username" id="github_username" required />
             </div>
 
             <div className="input-block">
@@ -22,14 +23,16 @@ function App() {
               <div className="input-block">
                 <label htmlFor="latitude"> Latitude </label>
                 <input name="latitude" id="latitude" required />
-              
+              </div>
+
+              <div className="input-block">
                 <label htmlFor="longitude"> Longitude </label>
                 <input name="longitude" id="longitude" required />
               </div>
             </div>
              
             <button type="submit"> Salvar </button>
-            </form>
+          </form>
         </aside>
       <main></main>
     </div>
