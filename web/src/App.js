@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './global.css';
+import './App.css';
 import './Sidebar.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <button type="submit"> Salvar </button>
           </form>
         </aside>
+
       <main></main>
     </div>
   );
