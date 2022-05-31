@@ -47,5 +47,11 @@ module.exports = {
         const devs = await Dev.find();
         
         return response.json(devs); 
-    }
+    },
+
+    async update(){
+
+    },
+
+    async destroy(){}
 };
