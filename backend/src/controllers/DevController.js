@@ -7,7 +7,7 @@ module.exports = {
     async store(request, response) {
         const { github_username, techs, latitude, longitude } = request.body;
         
-        let dev = Dev.findOne( {github_username});
+        let dev = await Dev.findOne( {github_username});
         
         if (!dev){
             const githubApiResponse = await axios.get(`https://api.github.com/users/${github_username}`)
