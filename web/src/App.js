@@ -7,6 +7,8 @@ import './Sidebar.css';
 import './Main.css';
 
 function App() {
+  const [devs, setDevs] = useState([]);
+
   const [github_username, setGitHubUsername] = useState('');
   const [techs, setTechs] = useState('');
 
@@ -30,7 +32,15 @@ function App() {
     );
   }, []);
 
-  
+  useEffect(()=> {  
+    async function loadDevs() {
+      const response = await api.get('devs/');
+      setDevs(response.data);
+    }
+
+    loadDevs();
+  }, []);
+
 async function handleAddDev(e) {
   e.preventDefault();
   const dev_obj = {
@@ -41,10 +51,13 @@ async function handleAddDev(e) {
   }
              
   const response = await api.post('devs/', dev_obj);
+  
   console.log(response.data);
   
   setGitHubUsername('');
   setTechs('');
+
+  setDevs([...devs, response.data]);
 }
 
 
@@ -106,41 +119,23 @@ async function handleAddDev(e) {
 
       <main>
         <ul>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars.githubusercontent.com/u/18131211?v=4" alt="Jose Mauro"></img>
-              <div className="user-info">
-                <strong>Jose Mauro</strong>
-                <span>Python, Node.js, React</span>
-              </div>
-            </header>
-            <p>SDN, Complex Networks, Bioinformatics, Astronomy and Physics</p>
-            <a href="https://github.com/josemauro"> Acessar perfil do Github</a>
-          </li>
+          {devs.map( dev => (
+             <li key={dev._id} className="dev-item">
+              <header>
+                <img src={dev.avatar_url} alt={dev.name}></img>
+                <div className="user-info">
+                  <strong>{dev.name}</strong>
+                  <span>{dev.techs.join(', ')}</span>
+                </div>
+              </header>
+              <p>{dev.bio}</p>
+              <a href={`https://github.com/${dev.github_username}`}> Acessar perfil do Github</a>
+            </li>
+          )
 
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars.githubusercontent.com/u/18131211?v=4" alt="Jose Mauro"></img>
-              <div className="user-info">
-                <strong>Jose Mauro</strong>
-                <span>Python, Node.js, React</span>
-              </div>
-            </header>
-            <p>SDN, Complex Networks, Bioinformatics, Astronomy and Physics</p>
-            <a href="https://github.com/josemauro"> Acessar perfil do Github</a>
-          </li>
+          )}
+         
 
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars.githubusercontent.com/u/18131211?v=4" alt="Jose Mauro"></img>
-              <div className="user-info">
-                <strong>Jose Mauro</strong>
-                <span>Python, Node.js, React</span>
-              </div>
-            </header>
-            <p>SDN, Complex Networks, Bioinformatics, Astronomy and Physics</p>
-            <a href="https://github.com/josemauro"> Acessar perfil do Github</a>
-          </li>
         </ul>
       </main>
     </div>
