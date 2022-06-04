@@ -34,12 +34,12 @@ module.exports = {
                 location
             }
         
-            const dev = await Dev.create(dev_obj);
+            dev = await Dev.create(dev_obj);
         }
         else {
             dev = {"error": "user already exists!"}
         }
-        
+
         return response.json(dev);
     },
 
@@ -49,9 +49,9 @@ module.exports = {
         return response.json(devs); 
     },
 
-    async update(){
+    // async update(){
 
-    },
+    // },
 
-    async destroy(){}
+    // async destroy(){}
 };
